@@ -7,3 +7,21 @@ spring:
         minIdle: 2
         removeAbandoned: true
         url: ${JDBC_DATABASE_URL}
+
+secruity:
+  client:
+    clientId: pkvxcvdk9uzcuvef8uty963mnvkwtu7x
+    clientSecret: MepKr2W9ShcxW9DyC5JZRpkYaQanzqt9
+    accessTokenUri: https://us.battle.net/oauth/authorize
+    userAuthorizationUri: https://us.battle.net/oauth/token
+    tokenName: oauth_token
+    authenticationScheme: query
+    clientAuthenticationScheme: form
+  resource:
+    userInfoUri:
+
+# battle net key     pkvxcvdk9uzcuvef8uty963mnvkwtu7x
+# battle net secret  MepKr2W9ShcxW9DyC5JZRpkYaQanzqt9
+# authorize uri https://<region>.battle.net/oauth/authorize
+# token uri https://<region>.battle.net/oauth/token
+
