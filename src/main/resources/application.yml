@@ -1,14 +1,14 @@
 spring:
-    datasource:
-        driverClassName: org.postgresql.Driver
-        initialSize: 5
-        maxActive: 10
-        maxIdle: 5
-        minIdle: 2
-        removeAbandoned: true
-        url: ${JDBC_DATABASE_URL}
+  datasource:
+    driverClassName: org.postgresql.Driver
+    initialSize: 5
+    maxActive: 10
+    maxIdle: 5
+    minIdle: 2
+    removeAbandoned: true
+    url: ${JDBC_DATABASE_URL}
 
-secruity:
+security:
   client:
     clientId: pkvxcvdk9uzcuvef8uty963mnvkwtu7x
     clientSecret: MepKr2W9ShcxW9DyC5JZRpkYaQanzqt9
@@ -17,11 +17,11 @@ secruity:
     tokenName: oauth_token
     authenticationScheme: query
     clientAuthenticationScheme: form
-  resource:
-    userInfoUri:
+#  resource:
+#    userInfoUri:
 
 # battle net key     pkvxcvdk9uzcuvef8uty963mnvkwtu7x
 # battle net secret  MepKr2W9ShcxW9DyC5JZRpkYaQanzqt9
 # authorize uri https://<region>.battle.net/oauth/authorize
 # token uri https://<region>.battle.net/oauth/token
-
+#
