@@ -9,6 +9,8 @@ import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth
 public class Diablo3websiteApplication {
 
 	public static void main(String[] args) {
+
 		SpringApplication.run(Diablo3websiteApplication.class, args);
+
 	}
 }
