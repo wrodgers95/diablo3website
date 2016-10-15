@@ -32,7 +32,7 @@ public class Diablo3websiteController {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String index(HttpSession session, Model model) {
 
-        int itemInput = 0;
+        int itemInput = 10000;
         String jsonData = "";
 
         ArrayList<String> jsonArray = new ArrayList<>();

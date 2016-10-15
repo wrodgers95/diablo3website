@@ -4,9 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "items")
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class Item {
 
 
