@@ -10,6 +10,7 @@ import com.theironyard.utilities.PasswordStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.HttpClientErrorException;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 @Controller
+@CrossOrigin
 public class Diablo3websiteController {
 
     @Autowired
@@ -29,6 +31,7 @@ public class Diablo3websiteController {
     @Autowired
     ItemRepository items;
 
+    @CrossOrigin
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String index(HttpSession session, Model model) {
 
