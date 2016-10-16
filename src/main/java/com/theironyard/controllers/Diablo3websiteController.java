@@ -33,7 +33,7 @@ public class Diablo3websiteController {
 //        int itemInput = 10000;
 //        String jsonData = "";
 //
-//        ArrayList<String> jsonArray = new ArrayList<>();
+        ArrayList<String> jsonArray = new ArrayList<>();
 //
 //        for (int i = 0; i < 10; i++) {
 //
@@ -55,12 +55,12 @@ public class Diablo3websiteController {
 //            itemInput++;
 //        }
 
-//        model.addAttribute("jsonArray", jsonArray);
+        model.addAttribute("jsonArray", jsonArray);
         return "index";
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
-    public ArrayList<String> items (HttpSession session) {
+    public ArrayList<String> items () {
 
         int itemInput = 10000;
         String jsonData = "";
