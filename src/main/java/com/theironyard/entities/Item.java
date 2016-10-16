@@ -10,18 +10,18 @@ import javax.persistence.*;
 public class Item {
 
 
-    @Column
-    private String name;
     @Id
     private int id;
     @Column
-    private String icon;
+    private String name;
     @Column
-    private String inventoryType;
+    private String icon;
     @Column
     private String itemLevel;
     @Column
     private String armor;
+    @Column
+    private String inventoryType;
 
 //    @Column
 //    private List<Stat> bonusStats;
