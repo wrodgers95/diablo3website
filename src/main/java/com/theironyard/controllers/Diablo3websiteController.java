@@ -29,6 +29,38 @@ public class Diablo3websiteController {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String index(HttpSession session, Model model) {
+//
+//        int itemInput = 10000;
+//        String jsonData = "";
+//
+//        ArrayList<String> jsonArray = new ArrayList<>();
+//
+//        for (int i = 0; i < 10; i++) {
+//
+//            String itemUri = "https://us.api.battle.net/wow/item/"+ itemInput +"?locale=en_US&apikey=yz98b2qzp8qfp62axbgrmzsuzjkwbgc8";
+//
+//            RestTemplate restTemplate = new RestTemplate();
+//            Item itemJson = null;
+//            try {
+//                itemJson = restTemplate.getForObject(itemUri, Item.class);
+//                try {items.save(itemJson);
+//                } catch (NullPointerException ex) { }
+//            } catch (HttpClientErrorException ex) { }
+//            try {
+//                jsonData = new ObjectMapper().writeValueAsString(itemJson);
+//            } catch (JsonProcessingException ex) {
+//                ex.printStackTrace();
+//            }
+//            jsonArray.add(jsonData);
+//            itemInput++;
+//        }
+
+//        model.addAttribute("jsonArray", jsonArray);
+        return "index";
+    }
+
+    @RequestMapping(path = "/", method = RequestMethod.POST)
+    public ArrayList<String> items (HttpSession session) {
 
         int itemInput = 10000;
         String jsonData = "";
@@ -54,8 +86,7 @@ public class Diablo3websiteController {
             jsonArray.add(jsonData);
             itemInput++;
         }
-        model.addAttribute("jsonArray", jsonArray);
-        return "index";
+        return jsonArray;
     }
 
 //    @RequestMapping(path = "/login", method = RequestMethod.POST)
