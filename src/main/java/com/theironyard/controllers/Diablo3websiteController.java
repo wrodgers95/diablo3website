@@ -55,11 +55,13 @@ public class Diablo3websiteController {
         return jsonArray;
     }
 
-//    @RequestMapping(path = "/search", method = RequestMethod.GET)
-//    public ArrayList<Item> itemSearch () {
-//
-////        items.findByInventoryType(5);
-//    }
+    @RequestMapping(path = "/search", method = RequestMethod.GET)
+    public Item itemSearch (String searchBox) {
+
+        Item retrievedItem = items.findByInventoryType(searchBox);
+
+        return retrievedItem;
+    }
 
 //    @RequestMapping(path = "/login", method = RequestMethod.POST)
 //    public User login(String username, String password, HttpSession session, HttpServletResponse response) throws Exception {
