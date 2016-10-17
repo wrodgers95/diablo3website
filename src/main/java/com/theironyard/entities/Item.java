@@ -21,7 +21,7 @@ public class Item {
     @Column
     private String armor;
     @Column
-    private String inventoryType;
+    private Integer inventoryType;
 
 //    @Column
 //    private List<Stat> bonusStats;
@@ -66,11 +66,11 @@ public class Item {
         this.armor = armor;
     }
 
-    public String getInventoryType() {
+    public Integer getInventoryType() {
         return inventoryType;
     }
 
-    public void setInventoryType(String inventoryType) {
+    public void setInventoryType(Integer inventoryType) {
         this.inventoryType = inventoryType;
     }
 }

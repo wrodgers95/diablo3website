@@ -1,15 +1,10 @@
 package com.theironyard.controllers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.theironyard.entities.Item;
 import com.theironyard.services.ItemRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -32,9 +27,9 @@ public class Diablo3websiteController {
         ArrayList<Item> jsonArray = new ArrayList<>();
 
         int itemInput = 10000;
-        String jsonData = "";
+//        String jsonData = "";
 
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
 
             String itemUri = "https://us.api.battle.net/wow/item/"+ itemInput +"?locale=en_US&apikey=yz98b2qzp8qfp62axbgrmzsuzjkwbgc8";
 
@@ -47,11 +42,11 @@ public class Diablo3websiteController {
                     jsonArray.add(itemJson);
                 } catch (NullPointerException ex) { }
             } catch (HttpClientErrorException ex) { }
-            try {
-                jsonData = new ObjectMapper().writeValueAsString(itemJson);
-            } catch (JsonProcessingException ex) {
-                ex.printStackTrace();
-            }
+//            try {
+//                jsonData = new ObjectMapper().writeValueAsString(itemJson);
+//            } catch (JsonProcessingException ex) {
+//                ex.printStackTrace();
+//            }
 //            jsonArray.add(jsonData);
             itemInput++;
         }
@@ -59,6 +54,12 @@ public class Diablo3websiteController {
         model.addAttribute("jsonArray", jsonArray);
         return jsonArray;
     }
+
+//    @RequestMapping(path = "/search", method = RequestMethod.GET)
+//    public ArrayList<Item> itemSearch () {
+//
+////        items.findByInventoryType(5);
+//    }
 
 //    @RequestMapping(path = "/login", method = RequestMethod.POST)
 //    public User login(String username, String password, HttpSession session, HttpServletResponse response) throws Exception {
