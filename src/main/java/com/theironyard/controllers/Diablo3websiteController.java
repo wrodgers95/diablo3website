@@ -27,9 +27,9 @@ public class Diablo3websiteController {
     ItemRepository items;
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public ArrayList<String> index(HttpSession session, Model model) {
+    public ArrayList<Item> index(HttpSession session, Model model) {
 
-        ArrayList<String> jsonArray = new ArrayList<>();
+        ArrayList<Item> jsonArray = new ArrayList<>();
 
         int itemInput = 10000;
         String jsonData = "";
@@ -43,7 +43,8 @@ public class Diablo3websiteController {
             try {
                 itemJson = restTemplate.getForObject(itemUri, Item.class);
                 try {items.save(itemJson);
-                    jsonArray.add(String.valueOf(itemJson));
+//                    jsonArray.add(String.valueOf(itemJson));
+                    jsonArray.add(itemJson);
                 } catch (NullPointerException ex) { }
             } catch (HttpClientErrorException ex) { }
             try {
@@ -51,7 +52,7 @@ public class Diablo3websiteController {
             } catch (JsonProcessingException ex) {
                 ex.printStackTrace();
             }
-            jsonArray.add(jsonData);
+//            jsonArray.add(jsonData);
             itemInput++;
         }
 
