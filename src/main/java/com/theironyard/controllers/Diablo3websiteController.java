@@ -43,7 +43,7 @@ public class Diablo3websiteController {
             try {
                 itemJson = restTemplate.getForObject(itemUri, Item.class);
                 try {items.save(itemJson);
-//                    jsonArray.add(String.valueOf(itemJson));
+                    jsonArray.add(String.valueOf(itemJson));
                 } catch (NullPointerException ex) { }
             } catch (HttpClientErrorException ex) { }
             try {
