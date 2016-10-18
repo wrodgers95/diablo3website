@@ -39,7 +39,7 @@ public class Diablo3websiteController {
         int itemInput = 10000;
 //        String jsonData = "";
 
-        for (int i = 0; i < 250; i++) {
+        for (int i = 0; i < 50; i++) {
 
             String itemUri = "https://us.api.battle.net/wow/item/"+ itemInput +"?locale=en_US&apikey=yz98b2qzp8qfp62axbgrmzsuzjkwbgc8";
 
@@ -62,6 +62,8 @@ public class Diablo3websiteController {
             itemInput++;
         }
 
+
+        jsonArray.add((Item) items.findAll());
         model.addAttribute("jsonArray", jsonArray);
         return jsonArray;
     }
