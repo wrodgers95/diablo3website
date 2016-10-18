@@ -46,7 +46,7 @@ public class Diablo3websiteController {
 
         int itemInput = 10000;
 
-        for (int i = 0; i < 50; i++) {
+        for (int i = 0; i < 500; i++) {
 
             String itemUri = "https://us.api.battle.net/wow/item/"+ itemInput +"?locale=en_US&apikey=yz98b2qzp8qfp62axbgrmzsuzjkwbgc8";
 
