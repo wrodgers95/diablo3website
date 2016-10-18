@@ -6,6 +6,7 @@ import com.theironyard.services.ItemRepository;
 import com.theironyard.services.UserRepository;
 import com.theironyard.utilities.PasswordStorage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,6 +17,7 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 @RestController
@@ -30,12 +32,22 @@ public class Diablo3websiteController {
 
     @CrossOrigin
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public Iterable<Item> index() {
+    public ArrayList<Iterable<Item>> index(Model model) {
 
+        ArrayList<Iterable<Item>> jsonArray = new ArrayList<>();
+
+        jsonArray.add(items.findAll());
+        model.addAttribute("jsonArray", jsonArray);
+
+        return jsonArray;
+    }
+
+    @RequestMapping(path = "/", method = RequestMethod.POST)
+    public String items(){
 
         int itemInput = 10000;
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 1000; i++) {
 
             String itemUri = "https://us.api.battle.net/wow/item/"+ itemInput +"?locale=en_US&apikey=yz98b2qzp8qfp62axbgrmzsuzjkwbgc8";
 
@@ -58,14 +70,8 @@ public class Diablo3websiteController {
             itemInput++;
         }
 
-        return items.findAll();
+        return "redirect:/";
     }
-
-//    @RequestMapping(path = "/", method = RequestMethod.POST)
-//    public String items(){
-//
-//        return "redirect:/";
-//    }
 
 //    @RequestMapping(path = "/search/{{inventoryType}}", method = RequestMethod.GET)
 //    public Item itemSearch (String inventoryType) {
