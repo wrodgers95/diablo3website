@@ -9,7 +9,6 @@ import javax.persistence.*;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item {
 
-
     @Id
     private int id;
     @Column

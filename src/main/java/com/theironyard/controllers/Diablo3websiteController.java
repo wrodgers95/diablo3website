@@ -50,7 +50,6 @@ public class Diablo3websiteController {
                 itemJson = restTemplate.getForObject(itemUri, Item.class);
                 if (Objects.equals(itemJson.getInventoryType(), "20")) {
                     itemJson.setInventoryType("5"); }
-
                 if (!Objects.equals(itemJson.getInventoryType(), "0")) {
                     try {
                         items.save(itemJson);
@@ -67,11 +66,11 @@ public class Diablo3websiteController {
         return "redirect:/";
     }
 
-    @RequestMapping(path = "/search/{{inventoryType}}", method = RequestMethod.GET)
-    public Item itemSearch (String inventoryType) {
-
-        return items.findByInventoryType(inventoryType);
-    }
+//    @RequestMapping(path = "/search/{{inventoryType}}", method = RequestMethod.GET)
+//    public Item itemSearch (String inventoryType) {
+//
+//        return items.findByInventoryType(inventoryType);
+//    }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public User login(String username, String password, HttpSession session, HttpServletResponse response) throws Exception {
