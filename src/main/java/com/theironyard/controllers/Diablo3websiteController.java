@@ -54,10 +54,12 @@ public class Diablo3websiteController {
                 if (!Objects.equals(itemJson.getInventoryType(), "0")) {
                     try {
                         items.save(itemJson);
-                    } catch (NullPointerException ignore) {
+                    } catch (NullPointerException ex) {
+                        ex.printStackTrace();
                     }
                 }
-            } catch (HttpClientErrorException ignore) {
+            } catch (HttpClientErrorException ex) {
+                ex.printStackTrace();
             }
             itemInput++;
         }
