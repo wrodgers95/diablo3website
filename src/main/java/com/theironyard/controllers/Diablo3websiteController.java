@@ -30,6 +30,7 @@ public class Diablo3websiteController {
     @Autowired
     ItemRepository items;
 
+    @CrossOrigin
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public ArrayList<Item> index(HttpSession session, Model model) {
 
