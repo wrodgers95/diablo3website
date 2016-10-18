@@ -32,12 +32,19 @@ public class Diablo3websiteController {
 
     @CrossOrigin
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public ArrayList<Item> index(HttpSession session, Model model) {
+    public ArrayList<Iterable<Item>> index(HttpSession session, Model model) {
 
-        ArrayList<Item> jsonArray = new ArrayList<>();
+        ArrayList<Iterable<Item>> jsonArray = new ArrayList<>();
+
+        jsonArray.add(items.findAll());
+        model.addAttribute("jsonArray", jsonArray);
+        return jsonArray;
+    }
+
+    @RequestMapping(path = "/", method = RequestMethod.POST)
+    public String items(){
 
         int itemInput = 10000;
-//        String jsonData = "";
 
         for (int i = 0; i < 50; i++) {
 
@@ -49,8 +56,6 @@ public class Diablo3websiteController {
                 itemJson = restTemplate.getForObject(itemUri, Item.class);
                 if (Objects.equals(itemJson.getInventoryType(), "20")) { itemJson.setInventoryType("5"); }
                 try {items.save(itemJson);
-//                    jsonArray.add(String.valueOf(itemJson));
-                    jsonArray.add(itemJson);
                 } catch (NullPointerException ex) { }
             } catch (HttpClientErrorException ex) { }
 //            try {
@@ -62,10 +67,7 @@ public class Diablo3websiteController {
             itemInput++;
         }
 
-
-        jsonArray.add((Item) items.findAll());
-        model.addAttribute("jsonArray", jsonArray);
-        return jsonArray;
+        return "redirect:/";
     }
 
     @RequestMapping(path = "/search/{{inventoryType}}", method = RequestMethod.GET)
