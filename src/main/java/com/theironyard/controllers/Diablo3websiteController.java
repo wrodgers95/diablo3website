@@ -6,7 +6,6 @@ import com.theironyard.services.ItemRepository;
 import com.theironyard.services.UserRepository;
 import com.theironyard.utilities.PasswordStorage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -31,12 +30,8 @@ public class Diablo3websiteController {
 
     @CrossOrigin
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public Iterable<Item> index(HttpSession session, Model model) {
+    public Iterable<Item> index() {
 
-//        ArrayList<Iterable<Item>> jsonArray = new ArrayList<>();
-
-//        jsonArray.add(items.findAll());
-//        model.addAttribute("jsonArray", jsonArray);
         return items.findAll();
     }
 
@@ -59,10 +54,11 @@ public class Diablo3websiteController {
                 if (!Objects.equals(itemJson.getInventoryType(), "0")) {
                     try {
                         items.save(itemJson);
-                    } catch (NullPointerException ex) {
+                    } catch (NullPointerException ignore) {
                     }
                 }
-            } catch (HttpClientErrorException ex) { }
+            } catch (HttpClientErrorException ignore) {
+            }
             itemInput++;
         }
 
