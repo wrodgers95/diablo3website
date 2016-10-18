@@ -32,11 +32,6 @@ public class Diablo3websiteController {
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public Iterable<Item> index() {
 
-        return items.findAll();
-    }
-
-    @RequestMapping(path = "/", method = RequestMethod.POST)
-    public String items(){
 
         int itemInput = 10000;
 
@@ -63,8 +58,14 @@ public class Diablo3websiteController {
             itemInput++;
         }
 
-        return "redirect:/";
+        return items.findAll();
     }
+
+//    @RequestMapping(path = "/", method = RequestMethod.POST)
+//    public String items(){
+//
+//        return "redirect:/";
+//    }
 
 //    @RequestMapping(path = "/search/{{inventoryType}}", method = RequestMethod.GET)
 //    public Item itemSearch (String inventoryType) {
