@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
@@ -42,7 +41,7 @@ public class Diablo3websiteController {
         return jsonArray;
     }
 
-    @PostConstruct
+    @RequestMapping(path = "/", method = RequestMethod.POST)
     public String items(){
 
         int itemInput = 10000;
