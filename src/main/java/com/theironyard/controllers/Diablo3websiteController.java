@@ -17,7 +17,6 @@ import org.springframework.web.client.RestTemplate;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
 
 @RestController
@@ -32,13 +31,13 @@ public class Diablo3websiteController {
 
     @CrossOrigin
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public ArrayList<Iterable<Item>> index(HttpSession session, Model model) {
+    public Iterable<Item> index(HttpSession session, Model model) {
 
-        ArrayList<Iterable<Item>> jsonArray = new ArrayList<>();
+//        ArrayList<Iterable<Item>> jsonArray = new ArrayList<>();
 
-        jsonArray.add(items.findAll());
-        model.addAttribute("jsonArray", jsonArray);
-        return jsonArray;
+//        jsonArray.add(items.findAll());
+//        model.addAttribute("jsonArray", jsonArray);
+        return items.findAll();
     }
 
     @RequestMapping(path = "/", method = RequestMethod.POST)
@@ -54,16 +53,11 @@ public class Diablo3websiteController {
             Item itemJson = null;
             try {
                 itemJson = restTemplate.getForObject(itemUri, Item.class);
-                if (Objects.equals(itemJson.getInventoryType(), "20")) { itemJson.setInventoryType("5"); }
+                if (Objects.equals(itemJson.getInventoryType(), "20")) {
+                    itemJson.setInventoryType("5"); }
                 try {items.save(itemJson);
                 } catch (NullPointerException ex) { }
             } catch (HttpClientErrorException ex) { }
-//            try {
-//                jsonData = new ObjectMapper().writeValueAsString(itemJson);
-//            } catch (JsonProcessingException ex) {
-//                ex.printStackTrace();
-//            }
-//            jsonArray.add(jsonData);
             itemInput++;
         }
 
@@ -73,9 +67,7 @@ public class Diablo3websiteController {
     @RequestMapping(path = "/search/{{inventoryType}}", method = RequestMethod.GET)
     public Item itemSearch (String inventoryType) {
 
-        Item retrievedItem = items.findByInventoryType(inventoryType);
-
-        return retrievedItem;
+        return items.findByInventoryType(inventoryType);
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
