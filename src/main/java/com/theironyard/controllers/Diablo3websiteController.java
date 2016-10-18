@@ -50,13 +50,18 @@ public class Diablo3websiteController {
             String itemUri = "https://us.api.battle.net/wow/item/"+ itemInput +"?locale=en_US&apikey=yz98b2qzp8qfp62axbgrmzsuzjkwbgc8";
 
             RestTemplate restTemplate = new RestTemplate();
-            Item itemJson = null;
+            Item itemJson;
             try {
                 itemJson = restTemplate.getForObject(itemUri, Item.class);
                 if (Objects.equals(itemJson.getInventoryType(), "20")) {
                     itemJson.setInventoryType("5"); }
-                try {items.save(itemJson);
-                } catch (NullPointerException ex) { }
+
+                if (!Objects.equals(itemJson.getInventoryType(), "0")) {
+                    try {
+                        items.save(itemJson);
+                    } catch (NullPointerException ex) {
+                    }
+                }
             } catch (HttpClientErrorException ex) { }
             itemInput++;
         }
