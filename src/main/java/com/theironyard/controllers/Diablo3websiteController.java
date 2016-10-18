@@ -38,7 +38,7 @@ public class Diablo3websiteController {
         int itemInput = 10000;
 //        String jsonData = "";
 
-        for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 500; i++) {
 
             String itemUri = "https://us.api.battle.net/wow/item/"+ itemInput +"?locale=en_US&apikey=yz98b2qzp8qfp62axbgrmzsuzjkwbgc8";
 
@@ -46,7 +46,7 @@ public class Diablo3websiteController {
             Item itemJson = null;
             try {
                 itemJson = restTemplate.getForObject(itemUri, Item.class);
-                if (Objects.equals(itemJson.getInventoryType(), "20")) itemJson.setInventoryType("5");
+                if (Objects.equals(itemJson.getInventoryType(), "20")) { itemJson.setInventoryType("5"); }
                 try {items.save(itemJson);
 //                    jsonArray.add(String.valueOf(itemJson));
                     jsonArray.add(itemJson);
