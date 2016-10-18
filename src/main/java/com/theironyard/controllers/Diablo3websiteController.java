@@ -1,22 +1,31 @@
 package com.theironyard.controllers;
 
 import com.theironyard.entities.Item;
+import com.theironyard.entities.User;
 import com.theironyard.services.ItemRepository;
+import com.theironyard.services.UserRepository;
+import com.theironyard.utilities.PasswordStorage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 @RestController
 @CrossOrigin
 public class Diablo3websiteController {
 
-//    @Autowired
-//    UserRepository users;
+    @Autowired
+    UserRepository users;
 
     @Autowired
     ItemRepository items;
@@ -37,6 +46,7 @@ public class Diablo3websiteController {
             Item itemJson = null;
             try {
                 itemJson = restTemplate.getForObject(itemUri, Item.class);
+                if (Objects.equals(itemJson.getInventoryType(), "20")) itemJson.setInventoryType("5");
                 try {items.save(itemJson);
 //                    jsonArray.add(String.valueOf(itemJson));
                     jsonArray.add(itemJson);
@@ -55,32 +65,32 @@ public class Diablo3websiteController {
         return jsonArray;
     }
 
-    @RequestMapping(path = "/search", method = RequestMethod.GET)
-    public Item itemSearch (String searchBox) {
+    @RequestMapping(path = "/search/{{inventoryType}}", method = RequestMethod.GET)
+    public Item itemSearch (String inventoryType) {
 
-        Item retrievedItem = items.findByInventoryType(searchBox);
+        Item retrievedItem = items.findByInventoryType(inventoryType);
 
         return retrievedItem;
     }
 
-//    @RequestMapping(path = "/login", method = RequestMethod.POST)
-//    public User login(String username, String password, HttpSession session, HttpServletResponse response) throws Exception {
-//        User user = users.findFirstByName(username);
-//        if (user == null) {
-//            user = new User(username, PasswordStorage.createHash(password));
-//            users.save(user);
-//        }
-//        else if (!PasswordStorage.verifyPassword(password, user.getPassword())) {
-//            throw new Exception("Wrong password");
-//        }
-//        session.setAttribute("username", username);
-//        response.sendRedirect("/");
-//        return user;
-//    }
-//
-//    @RequestMapping(path = "/logout", method = RequestMethod.POST)
-//    public void logout(HttpSession session, HttpServletResponse response) throws IOException {
-//        session.invalidate();
-//        response.sendRedirect("/");
-//    }
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public User login(String username, String password, HttpSession session, HttpServletResponse response) throws Exception {
+        User user = users.findFirstByName(username);
+        if (user == null) {
+            user = new User(username, PasswordStorage.createHash(password));
+            users.save(user);
+        }
+        else if (!PasswordStorage.verifyPassword(password, user.getPassword())) {
+            throw new Exception("Wrong password");
+        }
+        session.setAttribute("username", username);
+        response.sendRedirect("/");
+        return user;
+    }
+
+    @RequestMapping(path = "/logout", method = RequestMethod.POST)
+    public void logout(HttpSession session, HttpServletResponse response) throws IOException {
+        session.invalidate();
+        response.sendRedirect("/");
+    }
 }
