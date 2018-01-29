@@ -45,11 +45,11 @@ public class Diablo3websiteController {
     @RequestMapping(path = "/", method = RequestMethod.POST)
     public String items(){
 
-        int itemInput = 10000;
+        int itemInput = 10568;
 
         for (int i = 0; i < 1000; i++) {
 
-            String itemUri = "https://us.api.battle.net/wow/item/"+ itemInput +"?locale=en_US&apikey=yz98b2qzp8qfp62axbgrmzsuzjkwbgc8";
+            String itemUri = "https://us.api.battle.net/wow/item/"+ itemInput +"?locale=en_US&apikey=hwsu4qv4quwjx4cpcqt6c5nw9xhewx4b";
 
             RestTemplate restTemplate = new RestTemplate();
             Item itemJson;
@@ -78,25 +78,25 @@ public class Diablo3websiteController {
 //
 //        return items.findByInventoryType(inventoryType);
 //    }
-
-    @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public User login(String username, String password, HttpSession session, HttpServletResponse response) throws Exception {
-        User user = users.findFirstByName(username);
-        if (user == null) {
-            user = new User(username, PasswordStorage.createHash(password));
-            users.save(user);
-        }
-        else if (!PasswordStorage.verifyPassword(password, user.getPassword())) {
-            throw new Exception("Wrong password");
-        }
-        session.setAttribute("username", username);
-        response.sendRedirect("/");
-        return user;
-    }
-
-    @RequestMapping(path = "/logout", method = RequestMethod.POST)
-    public void logout(HttpSession session, HttpServletResponse response) throws IOException {
-        session.invalidate();
-        response.sendRedirect("/");
-    }
+//
+//    @RequestMapping(path = "/login", method = RequestMethod.POST)
+//    public User login(String username, String password, HttpSession session, HttpServletResponse response) throws Exception {
+//        User user = users.findFirstByName(username);
+//        if (user == null) {
+//            user = new User(username, PasswordStorage.createHash(password));
+//            users.save(user);
+//        }
+//        else if (!PasswordStorage.verifyPassword(password, user.getPassword())) {
+//            throw new Exception("Wrong password");
+//        }
+//        session.setAttribute("username", username);
+//        response.sendRedirect("/");
+//        return user;
+//    }
+//
+//    @RequestMapping(path = "/logout", method = RequestMethod.POST)
+//    public void logout(HttpSession session, HttpServletResponse response) throws IOException {
+//        session.invalidate();
+//        response.sendRedirect("/");
+//    }
 }
